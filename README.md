@@ -32,7 +32,7 @@ source.
 
 ## Screenshots
 
-[![Main screen][modified_main]]
+[![Main screen][screen1th]][screen1]
 [![Edit habit][screen2th]][screen2]
 [![Habit strength][screen3th]][screen3]
 [![Habit history and streaks][screen4th]][screen4]
