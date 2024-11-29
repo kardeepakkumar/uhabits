@@ -47,6 +47,7 @@ class CheckmarkWidgetView : HabitWidgetView {
     var percentage = 0f
     var name: String? = null
     private lateinit var ring: RingView
+    private lateinit var currentStreak: TextView
     private lateinit var label: TextView
     var entryValue = 0
     var entryState = 0
@@ -88,6 +89,8 @@ class CheckmarkWidgetView : HabitWidgetView {
         ring.setBackgroundColor(bgColor)
         ring.setText(text)
         ring.setIsStrokedTextEnabled(strokedTextEnabled)
+        currentStreak.text = name
+        currentStreak.setTextColor(fgColor)
         label.text = name
         label.setTextColor(fgColor)
         requestLayout()
@@ -138,6 +141,7 @@ class CheckmarkWidgetView : HabitWidgetView {
             width = min(width, height)
         }
         val textSize = min(0.175f * width, getDimension(context, R.dimen.smallTextSize))
+        currentStreak.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         label.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         if (isNumerical) {
             ring.setTextSize(textSize * 0.9f)
@@ -156,6 +160,7 @@ class CheckmarkWidgetView : HabitWidgetView {
             (context.applicationContext as HabitsApplication).component
         preferences = appComponent.preferences
         ring = findViewById<View>(R.id.scoreRing) as RingView
+        currentStreak = findViewById<View>(R.id.currentStreak) as TextView
         label = findViewById<View>(R.id.label) as TextView
         ring.setIsTransparencyEnabled(true)
         if (isInEditMode) {

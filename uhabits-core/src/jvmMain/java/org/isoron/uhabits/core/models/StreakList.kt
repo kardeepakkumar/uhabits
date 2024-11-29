@@ -20,10 +20,17 @@ package org.isoron.uhabits.core.models
 
 import javax.annotation.concurrent.ThreadSafe
 import kotlin.math.min
+import org.isoron.uhabits.core.utils.DateUtils.Companion.getToday
 
 @ThreadSafe
 class StreakList {
     private val list = ArrayList<Streak>()
+    private var currentStreak = 0
+
+    @Synchronized
+    fun getCurrent(): String {
+        return currentStreak.toString()
+    }
 
     @Synchronized
     fun getBest(limit: Int): List<Streak> {
@@ -40,6 +47,7 @@ class StreakList {
         to: Timestamp
     ) {
         list.clear()
+        currentStreak = 0
         val timestamps = computedEntries
             .getByInterval(from, to)
             .filter { it.value > 0 }
@@ -55,10 +63,16 @@ class StreakList {
             if (current == begin.minus(1)) {
                 begin = current
             } else {
+                if ((end == timestamps[0]) and ((end == getToday()) or (end == getToday().minus(1)))) {
+                    currentStreak = Streak(begin, end).length
+                }
                 list.add(Streak(begin, end))
                 begin = current
                 end = current
             }
+        }
+        if ((end == timestamps[0]) and ((end == getToday()) or (end == getToday().minus(1)))) {
+            currentStreak = Streak(begin, end).length
         }
         list.add(Streak(begin, end))
     }

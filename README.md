@@ -1,3 +1,12 @@
+## Fork Notes
+
+In this fork, I have added a current streak display feature to the main page of the app. This does not align with the original creators' intent as they specifically don't want a "don't-break-the-chain" habit app. I love this app's design, and wanted this feature for myself. You can download the apk from the release section if you like. App's export/import and rest of the features work as it is.
+
+Here you can see the modified version, with the current streak listed by the app score ring.
+
+<img src="screenshots/modified_main.jpg" alt="Modified Main Screen" style="max-width: 50%;">
+
+
 <h1 align="center">Loop Habit Tracker</h1>
 <p align="center">
   <a href="https://github.com/iSoron/uhabits/actions?query=workflow%3A%22Build+%26+Test%22">
@@ -23,7 +32,7 @@ source.
 
 ## Screenshots
 
-[![Main screen][screen1th]][screen1]
+[![Main screen][modified_main]]
 [![Edit habit][screen2th]][screen2]
 [![Habit strength][screen3th]][screen3]
 [![Habit history and streaks][screen4th]][screen4]

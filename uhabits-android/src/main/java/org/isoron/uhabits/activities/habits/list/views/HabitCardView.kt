@@ -126,6 +126,7 @@ class HabitCardView(
     var checkmarkPanel: CheckmarkPanelView
     private var numberPanel: NumberPanelView
     private var innerFrame: LinearLayout
+    private var currentStreak: TextView
     private var label: TextView
     private var scoreRing: RingView
 
@@ -141,6 +142,15 @@ class HabitCardView(
                 gravity = Gravity.CENTER
             }
             setThickness(thickness)
+        }
+
+        currentStreak = TextView(context).apply {
+            maxLines = 2
+            ellipsize = TextUtils.TruncateAt.END
+            layoutParams = LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f)
+            if (SDK_INT >= Build.VERSION_CODES.Q) {
+                breakStrategy = BREAK_STRATEGY_BALANCED
+            }
         }
 
         label = TextView(context).apply {
@@ -188,6 +198,7 @@ class HabitCardView(
             elevation = dp(1f)
 
             addView(scoreRing)
+            addView(currentStreak)
             addView(label)
             addView(checkmarkPanel)
             addView(numberPanel)
@@ -259,6 +270,10 @@ class HabitCardView(
         }
 
         val c = getActiveColor(h)
+        currentStreak.apply {
+            text = h.streaks.getCurrent()
+            setTextColor(c)
+        }
         label.apply {
             text = h.name
             setTextColor(c)
